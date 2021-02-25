@@ -61,11 +61,32 @@ namespace ViewTask.Controllers
             return View("ShoppingList", shoppingList);
         }
 
-        public IActionResult TimeToShop() {
+        public IActionResult TimeToShop() 
+        {
+            ViewBag.TimeToBuy = DateTime.Now;
+
             return PartialView("TimeToShop");
         }
 
+        [HttpGet]
         public IActionResult ShoppingCart() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ShoppingCart(ShoppingOrder response) 
+        {
+            if (ModelState.IsValid) {
+                Repository.AddResponse(response);
+
+                return View("Confirm", response);
+            }
+
+            return View();
+        }
+
+        public ViewResult OrderConfirmed() 
         {
             return View();
         }
