@@ -61,6 +61,10 @@ namespace ViewTask.Controllers
             return View("ShoppingList", shoppingList);
         }
 
+        public IActionResult TimeToShop() {
+            return PartialView("TimeToShop");
+        }
+
         public IActionResult ShoppingCart() 
         {
             return View();
