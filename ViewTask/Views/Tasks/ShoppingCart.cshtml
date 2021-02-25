@@ -5,3 +5,31 @@
     @inject ViewTask.Services.ITimeService date
 }
 
+@model ViewTask.Models.ShoppingOrder
+
+<h1>Your shopping cart</h1>
+
+<form asp-action="ShoppingCart" method="post">
+    <div asp-validation-summary="All" class="alert alert-warning"></div>
+
+    <div class="form-group">
+        <label for="formGroupExampleInput">Input your fullname:</label>
+        <input asp-for="@Model.Name"  type="text" class="form-control" placeholder="Input your fullname:">
+    </div>
+
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Input your address:</label>
+        <input asp-for="@Model.Address" type="text" class="form-control" placeholder="Input your address:">
+    </div>
+
+    <div class="form-group">
+        <select asp-for="@Model.Mall" class="form-control" id="exampleFormControlSelect1">
+            <option value="WallMart">WallMart</option>
+            <option value="Silpo">Silpo</option>
+            <option value="ATB">ATB</option>
+            <option value="Metro">Metro</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Send</button>
+</form>
