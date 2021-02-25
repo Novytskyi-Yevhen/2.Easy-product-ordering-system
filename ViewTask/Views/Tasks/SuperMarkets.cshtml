@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.listSuperMarket = new List<string>() { "WellMart", "Silpo", "ATB", "Furshet", "Metro" };
+}
+<div class="text-left">
+    <h1>Our Supermarkets</h1>
+    <h2>There are @ViewBag.listSuperMarket.Count markets:</h2>
+    @foreach (string item in ViewBag.listSuperMarket)
+    {
+        <p>@item</p>
+    }
+</div>
