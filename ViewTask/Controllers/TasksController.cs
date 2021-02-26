@@ -25,6 +25,19 @@ namespace ViewTask.Controllers
 
         public IActionResult Index() 
         {
+            ViewBag.Products = new Product[] 
+            {
+                new Product("Bread", 10),
+                new Product("Milk", 11),
+                new Product("Cheese", 140),
+                new Product("Sausage", 110),
+                new Product("Potato", 7),
+                new Product("Banana", 23),
+                new Product("Tomato", 25),
+                new Product("Candy", 75),
+                new Product("Cola", 85),
+            };
+
             return View();
         }
 
@@ -58,14 +71,35 @@ namespace ViewTask.Controllers
             shoppingList.Add(products[6], 5);
             shoppingList.Add(products[8], 10);
 
+            ViewBag.Date = DateTime.Now.ToString("dd/MM/yyyy");
+
             return View("ShoppingList", shoppingList);
         }
 
-        public IActionResult TimeToShop() {
+        public IActionResult TimeToShop() 
+        {
             return PartialView("TimeToShop");
         }
 
+        [HttpGet]
         public IActionResult ShoppingCart() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ShoppingCart(ShoppingOrder response) 
+        {
+            if (ModelState.IsValid) {
+                Repository.AddResponse(response);
+
+                return View("Confirm", response);
+            }
+
+            return View();
+        }
+
+        public ViewResult OrderConfirmed() 
         {
             return View();
         }
