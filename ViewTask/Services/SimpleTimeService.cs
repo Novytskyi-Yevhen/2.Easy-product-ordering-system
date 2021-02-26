@@ -9,7 +9,7 @@ namespace ViewTask.Services
     {
         public DateTime GetTimeForTomorrow()
         {
-            return DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0));
+            return DateTime.Now.AddDays(1.0);
         }
     }
 }

@@ -3,7 +3,7 @@
 *@
 @{
     @inject ViewTask.Services.ITimeService date
-
+    DateTime nowDate = date.GetTimeForTomorrow();
     Product[] products = new Product[]
     {
         new Product("Bread", 10),
@@ -66,13 +66,13 @@
     <div class="form-group">
         <div class="btn-group-vertical" role="group">
             <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btnradio1">Radio 1</label>
+            <label class="btn btn-outline-primary" for="btnradio1">@nowDate.Date.ToString("MM/dd/yyyy")</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio2">Radio 2</label>
+            <label class="btn btn-outline-primary" for="btnradio2">@nowDate.AddDays(1.0).Date.ToString("MM/dd/yyyy")</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
+            
+            <label class="btn btn-outline-primary" for="btnradio3">@nowDate.AddDays(2.0).Date.ToString("MM/dd/yyyy")</label>
 
             @*@foreach (var item in date) {
                 <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
