@@ -1,9 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
     @inject ViewTask.Services.ITimeService date
     DateTime nowDate = date.GetTimeForTomorrow();
+
+    ViewBag.listSuperMarket = new List<string>() { "WellMart", "Silpo", "ATB", "Furshet", "Metro" };
+
     Product[] products = new Product[]
     {
         new Product("Bread", 10),
@@ -28,7 +28,6 @@
 
 @model ViewTask.Models.ShoppingOrder
 
-
 <h1>Your shopping cart</h1>
 
 <form asp-action="ShoppingCart" method="post">
@@ -46,10 +45,9 @@
 
     <div class="form-group">
         <select asp-for="@Model.Mall" class="form-control" id="exampleFormControlSelect1">
-            <option value="WallMart">WallMart</option>
-            <option value="Silpo">Silpo</option>
-            <option value="ATB">ATB</option>
-            <option value="Metro">Metro</option>
+            @foreach (string item in ViewBag.listSuperMarket) {
+                <option value=@item>@item</option>
+            }
         </select>
     </div>
 
@@ -61,23 +59,12 @@
         </select>
     </div>
 
-    @*HERE! We have to improve this code. *@
-    @*Have render dynamically radio buttons. *@
     <div class="form-group">
         <div class="btn-group-vertical" role="group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btnradio1">@nowDate.Date.ToString("MM/dd/yyyy")</label>
-
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio2">@nowDate.AddDays(1.0).Date.ToString("MM/dd/yyyy")</label>
-
-            
-            <label class="btn btn-outline-primary" for="btnradio3">@nowDate.AddDays(2.0).Date.ToString("MM/dd/yyyy")</label>
-
-            @*@foreach (var item in date) {
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
-            }*@
+            @for (int counter = 0; counter < 3; counter++) {
+                <input type="radio" class="btn-check" name="btnradio" id=@counter autocomplete="off">
+                <label class="btn btn-outline-primary" for=@counter>@nowDate.AddDays(counter).Date.ToString("MM/dd/yyyy")</label>
+            }
         </div>
     </div>
 
