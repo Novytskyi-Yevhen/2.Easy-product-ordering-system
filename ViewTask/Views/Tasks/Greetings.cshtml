@@ -1,0 +1,62 @@
+﻿@{
+    string myMessage = "Hello C# Marathon!";
+    string greeting = "Welcome to our project!";
+    string wish = "Not Implemented";
+    DateTime date = DateTime.Now;
+    int hour = date.Hour;
+    DayOfWeek dayOfWeek = date.DayOfWeek;
+
+    if (date.Hour > 6 && date.Hour < 12)
+    {
+        wish = "Good Morning!";
+    }
+    else if (date.Hour >= 12 && date.Hour < 18)
+    {
+        wish = "Good Day!";
+    }
+    else if (date.Hour >= 18 && date.Hour < 22)
+    {
+        wish = "Good Evening";
+    }
+    else
+    {
+        wish = $"Good Night";
+    }
+
+
+
+}
+<h1>Greetings</h1>
+<p>The value of myMessage is: @myMessage</p>
+<p>The greeting is: @greeting</p>
+<p>Here in Ukraine: @dayOfWeek</p>
+<p>We wish you: @wish</p>
+<p>Today is: @dayOfWeek</p>
+
+<table class="table table-bordered" >
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td scope="col">Day</td>
+            <td scope="col">@date.Day</td>
+        </tr>
+        <tr>
+            <td scope="col">Hour</td>
+            <td scope="col">@hour</td>
+        </tr>
+        <tr>
+            <td scope="col">Minute</td>
+            <td scope="col">@date.Minute</td>
+        </tr>
+        <tr>
+            <td scope="col">Second</td>
+            <td scope="col">@date.Second</td>
+        </tr>
+    </tbody>
+</table>
+    

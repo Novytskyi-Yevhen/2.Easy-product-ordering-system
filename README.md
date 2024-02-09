@@ -21,6 +21,9 @@ The page contains navigation bars  that redirect the user to the appropriate vie
 
 
 3.	View ‘Greetings’:
+
+
+
 ![Greetings](/images/3.png)
  
    - Messages are placed as variables;

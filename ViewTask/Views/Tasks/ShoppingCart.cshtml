@@ -1,0 +1,72 @@
+﻿@{
+    @inject ViewTask.Services.ITimeService date
+    DateTime nowDate = date.GetTimeForTomorrow();
+
+    ViewBag.listSuperMarket = new List<string>() { "WellMart", "Silpo", "ATB", "Furshet", "Metro" };
+
+    Product[] products = new Product[]
+    {
+        new Product("Bread", 10),
+        new Product("Milk", 11),
+        new Product("Cheese", 140),
+        new Product("Sausage", 110),
+        new Product("Potato", 7),
+        new Product("Banana", 23),
+        new Product("Tomato", 25),
+        new Product("Candy", 75),
+        new Product("Cola", 85),
+    };
+
+    Dictionary<Product, int> shoppingList = new Dictionary<Product, int>();
+
+    shoppingList.Add(products[1], 2);
+    shoppingList.Add(products[0], 2);
+    shoppingList.Add(products[3], 1);
+    shoppingList.Add(products[6], 5);
+    shoppingList.Add(products[8], 10);
+}
+
+@model ViewTask.Models.ShoppingOrder
+
+<h1>Your shopping cart</h1>
+
+<form asp-action="ShoppingCart" method="post">
+    <div asp-validation-summary="All" class="alert alert-warning"></div>
+
+    <div class="form-group">
+        <label for="formGroupExampleInput">Input your fullname:</label>
+        <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Input your fullname:">
+    </div>
+
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Input your address:</label>
+        <input asp-for="@Model.Address" type="text" class="form-control" placeholder="Input your address:">
+    </div>
+
+    <div class="form-group">
+        <select asp-for="@Model.Mall" class="form-control" id="exampleFormControlSelect1">
+            @foreach (string item in ViewBag.listSuperMarket) {
+                <option value=@item>@item</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <select multiple class="form-control">
+            @foreach (var item in shoppingList) {
+                <option>@item.Key.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <div class="btn-group-vertical" role="group">
+            @for (int counter = 0; counter < 3; counter++) {
+                <input type="radio" class="btn-check" name="btnradio" id=@counter autocomplete="off">
+                <label class="btn btn-outline-primary" for=@counter>@nowDate.AddDays(counter).Date.ToString("MM/dd/yyyy")</label>
+            }
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Send</button>
+</form>
